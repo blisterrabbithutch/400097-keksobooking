@@ -73,6 +73,15 @@ var getRandomCheckOut = function () {
 getRandomCheckOut();
 console.log(getRandomCheckOut());
 
+// как сделать принт нескольких значений - запустить цикл несколько раз?
+var featuresArrayOptions = ["wifi", "dishwasher", "parking", "washer", "elevator", "conditioner"];
+var getRandomFeatures = function () {
+	for (var i = 0; i < Math.floor(0 + (Math.random() * (featuresArrayOptions.length + 1))); i++) {
+  		return featuresArrayOptions[Math.floor(Math.random()*(featuresArrayOptions.length))];
+	}
+}
+getRandomFeatures();
+console.log(getRandomFeatures());
 
 
 // почему двойные фигурные скобки?
