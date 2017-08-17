@@ -19,7 +19,7 @@ var getRandomAvatar = function (min, max) {
 getRandomAvatar(1, 8);
 console.log(getRandomAvatar(1, 8));
 
-var titleArrayOptions = [Большая уютная квартира, Маленькая неуютная квартира, Огромный прекрасный дворец, Маленький ужасный дворец, Красивый гостевой домик, Некрасивый негостеприимный домик, Уютное бунгало далеко от моря, Неуютное бунгало по колено в воде];
+var titleArrayOptions = ["Большая уютная квартира", "Маленькая неуютная квартира", "Огромный прекрасный дворец", "Маленький ужасный дворец", "Красивый гостевой домик", "Некрасивый негостеприимный домик", "Уютное бунгало далеко от моря", "Неуютное бунгало по колено в воде"];
 var getRandomTitle = function () {
 	return titleArrayOptions[Math.floor(Math.random()*(titleArrayOptions.length))];	
 }
@@ -29,7 +29,7 @@ console.log(getRandomTitle());
 // что писать сюда?
 var adressArrayOptions = [];
 var getRandomAdress = function () {
-	
+	return '';
 }
 getRandomAdress();
 console.log(getRandomAdress());
@@ -74,7 +74,7 @@ getRandomCheckOut();
 console.log(getRandomCheckOut());
 
 // как сделать принт нескольких значений - запустить цикл несколько раз?
-var featuresArrayOptions = [wifi, dishwasher, parking, washer, elevator, conditioner];
+var featuresArrayOptions = ["wifi", "dishwasher", "parking", "washer", "elevator", "conditioner"];
 var getRandomFeatures = function () {
 	for (var i = 0; i < Math.floor(0 + (Math.random() * (featuresArrayOptions.length + 1))); i++) {
   		return featuresArrayOptions[Math.floor(Math.random()*(featuresArrayOptions.length))];
@@ -112,22 +112,22 @@ console.log(getRandomLocationY(100, 500));
 // здесь задавать несколько объектов?
 var arrayAd = [author, offer, location];
 var author = {
-		avatar: getRandomAvatar(1, 8);
+	avatar: getRandomAvatar(1, 8)
 }
 var offer = {
-		title: getRandomTitle();
-		address: getRandomAdress();
-		price: getRandomPrice(1000, 1000000);
-		type: getRandomType();
-		rooms: getRandomRooms(1, 5);
-		guests: getRandomGuests(1, 20);
-		checkin: getRandomCheckIn();
-		checkout: getRandomCheckOut();
-		features: getRandomFeatures();
-		description: getRandomDescription();
+		title: getRandomTitle()
+		adress: getRandomAdress()
+		price: getRandomPrice(1000, 1000000)
+		type: getRandomType()
+		rooms: getRandomRooms(1, 5)
+		guests: getRandomGuests(1, 20)
+		checkin: getRandomCheckIn()
+		checkout: getRandomCheckOut()
+		features: getRandomFeatures()
+		description: getRandomDescription()
 		photos: getRandomPhotos()
 }
 var location: {
-		x: getRandomLocationX(300, 900);
+		x: getRandomLocationX(300, 900)
 		y: getRandomLocationY(100, 500)
 }
