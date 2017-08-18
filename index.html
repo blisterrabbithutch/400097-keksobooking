@@ -261,7 +261,11 @@
     </nav>
   </div>
 </footer>
-
+<template class="hidden location_mark">
+  <div class="pin" style="left: <span class='pin_location_x'>{{location.x}}</span>px; top: <span class='pin_location_y'>{{location.y}}</span>px">
+    <img src="<span class='pin_avatar'>{{author.avatar}}</span>" class="rounded" width="40" height="40">
+  </div>
+</template>
 <template id="lodge-template" class="hidden">
   <div class="dialog__panel">
     <h3 class="lodge__title"></h3>
