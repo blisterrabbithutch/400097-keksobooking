@@ -74,16 +74,16 @@ var author = {
 	avatar: getRandomAvatar(1, 8)
 }
 var offer = {
-		title: getRandomTitle()
+		title: getRandomTitle(),
 		// adress: getRandomAdress()
-		price: getRandomPrice(1000, 1000000)
-		type: getRandomType()
-		rooms: getRandomRooms(1, 5)
-		guests: getRandomGuests(1, 20)
-		checkin: getRandomCheckIn()
-		checkout: getRandomCheckOut()
-		features: getRandomFeatures()
-		description: getRandomDescription()
+		price: getRandomPrice(1000, 1000000),
+		type: getRandomType(),
+		rooms: getRandomRooms(1, 5),
+		guests: getRandomGuests(1, 20),
+		checkin: getRandomCheckIn(),
+		checkout: getRandomCheckOut(),
+		features: getRandomFeatures(),
+		description: getRandomDescription(),
 		photos: getRandomPhotos()
 }
 var location: {
