@@ -69,3 +69,7 @@ var createNewAdvertisement = function(index) {
 for (var i = 0; i < 8; i++) {
   advertisements[i] = createNewAdvertisement();
 }
+
+
+
+
