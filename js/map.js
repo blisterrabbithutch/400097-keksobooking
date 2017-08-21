@@ -22,7 +22,7 @@ var LOCATION_MAX_Y = 500;
 
 // 2. пишем универсальную функцию.
 
-var getRandomNumber = function (min, max) {
+var getRandomNumber = function(min, max) {
   return Math.round(min + Math.random() * (max - min));
 };
 
@@ -33,34 +33,34 @@ var advertisements = [];
 // 4. пишем функцию, которая формирует и возвращает объект со сгенерированными данными.
 
 
-var createNewAdvertisement = function (index) {
+var createNewAdvertisement = function(index) {
 
   var locationX = getRandomNumber(300, 900);
   var locationY = getRandomNumber(100, 500);
 
   return {
-  "author": {
-    "avatar": 'img/avatars/user0' + index + '.png',
-  },
+    "author": {
+      "avatar": 'img/avatars/user0' + index + '.png',
+    },
 
-  "offer": {
-    "title": OFFER_TITLE[i],
-    "address": locationX + ', ' + locationY,
-    "price": getRandomNumber(OFFER_MIN_PRICE, OFFER_MAX_PRICE),
-    "type": OFFER_TYPE[getRandomNumber(0, OFFER_TYPE.length - 1)],
-    "rooms": getRandomNumber(OFFER_MIN_ROOMS, OFFER_MAX_ROOMS),
-    "guests":getRandomNumber(OFFER_MIN_GUESTS, OFFER_MAX_GUESTS),
-    "checkin": OFFER_CHECK_IN[getRandomNumber(0, OFFER_CHECK_IN.length - 1)],
-    "checkout": OFFER_CHECK_OUT[getRandomNumber(0, OFFER_CHECK_OUT.length - 1)],
-    "features": 
-    "description": 
-    "photos": 
-  },
+    "offer": {
+      "title": OFFER_TITLE[i],
+      "address": locationX + ', ' + locationY,
+      "price": getRandomNumber(OFFER_MIN_PRICE, OFFER_MAX_PRICE),
+      "type": OFFER_TYPE[getRandomNumber(0, OFFER_TYPE.length - 1)],
+      "rooms": getRandomNumber(OFFER_MIN_ROOMS, OFFER_MAX_ROOMS),
+      "guests": getRandomNumber(OFFER_MIN_GUESTS, OFFER_MAX_GUESTS),
+      "checkin": OFFER_CHECK_IN[getRandomNumber(0, OFFER_CHECK_IN.length - 1)],
+      "checkout": OFFER_CHECK_OUT[getRandomNumber(0, OFFER_CHECK_OUT.length - 1)],
+      "features": OFFER_FEATURES.slice(0, OFFER_FEATURES.length - 1),
+      "description": '',
+      "photos": []
+    },
 
-  "location": {
-    "x": locationX,
-    "y": locationY
-  }
+    "location": {
+      "x": locationX,
+      "y": locationY
+    }
   }
 }
 
