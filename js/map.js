@@ -67,6 +67,14 @@ var createNewAdvertisement = function(index) {
 
 // 5. создаем цикл, который заполняет пустой массив элементами генерирующимися объектами. 
 
+for (var i = 0; i < OBJECT_NUMBER; i++) {
+  advertisements[i] = createNewAdvertisement(i);
+}
+
+
+
+
+
 var template = document.querySelector('.location_mark');
 var map = document.querySelector('.tokyo__pin-map');
 var pin = template.content.querySelector('.pin');
@@ -86,13 +94,13 @@ var createTemplate = function (index) {
 }
 
 
-
-for (var i = 0; i < OBJECT_NUMBER; i++) {
-  advertisements[i] = createNewAdvertisement(i);
-  fragment.appendChild(createTemplate(i));
+for (var j = 0; j < advertisements.length; j++) {
+  fragment.appendChild(createTemplate(advertisements[j]));
 }
+
 map.appendChild(fragment);
-console.log(advertisements);
+
+console.log(map);
 
 
 
