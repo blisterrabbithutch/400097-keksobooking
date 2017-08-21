@@ -40,7 +40,7 @@ var createNewAdvertisement = function(index) {
 
   return {
     "author": {
-      "avatar": 'img/avatars/user0' + index + '.png',
+      "avatar": 'img/avatars/user0' + index + '.png'
     },
 
     "offer": {
@@ -67,9 +67,9 @@ var createNewAdvertisement = function(index) {
 // 5. создаем цикл, который заполняет пустой массив элементами генерирующимися объектами. 
 
 for (var i = 0; i < 8; i++) {
-  advertisements[i] = createNewAdvertisement();
+  advertisements[i] = createNewAdvertisement(i);
 }
 
-
+console.log(advertisements);
 
 
