@@ -35,9 +35,7 @@ var getRandomNumber = function (min, max) {
 var advertisements = [];
 
 // 4. пишем функцию, которая формирует и возвращает объект со сгенерированными данными.
-// как вывести все переменные? в какой момент и как создавать объект? как написать функцию getRandomFeatures. какие имена свойств объекта выбрать
-// дебаггер не останавливается на функции. не понимаю почему
-// что значит индекс у функции в 4 пункте?
+
 
 var createNewAdvertisement = function () {
   var getRandomAvatar = 'img/avatars/user' + '0' + getRandomNumber(AUTHOR_MIN_AVATAR, AUTHOR_MAX_AVATAR) + '.png';
@@ -58,7 +56,7 @@ var createNewAdvertisement = function () {
   //  		};
   var getRandomDescription = '';
   var getRandomPhotos = [];
-  // как здесь разделять свойства объекта? структура объекта по заданию? author_avatar: getRandomAvatar() или author = { avatar: getRandomAvatar()}
+
   var advertisementObject = {
     author_avatar: getRandomAvatar(),
     offer_title: getRandomTitle(),
@@ -76,6 +74,8 @@ var createNewAdvertisement = function () {
     location_y: getRandomLocationY()
   }
 };
+
+// 5. создаем цикл, который заполняет пустой массив элементами генерирующимися объектами. 
 
 for (var i = 0; i < 8; i++) {
   advertisements[i] = createNewAdvertisement();
