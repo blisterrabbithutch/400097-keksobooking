@@ -19,6 +19,7 @@ var LOCATION_MIN_X = 300;
 var LOCATION_MAX_X = 900;
 var LOCATION_MIN_Y = 100;
 var LOCATION_MAX_Y = 500;
+var OBJECT_NUMBER = 8;
 
 // 2. пишем универсальную функцию.
 
@@ -40,7 +41,7 @@ var createNewAdvertisement = function(index) {
 
   return {
     "author": {
-      "avatar": 'img/avatars/user0' + index + '.png'
+      "avatar": 'img/avatars/user0' + (index + 1) + '.png'
     },
 
     "offer": {
@@ -66,10 +67,33 @@ var createNewAdvertisement = function(index) {
 
 // 5. создаем цикл, который заполняет пустой массив элементами генерирующимися объектами. 
 
-for (var i = 0; i < 8; i++) {
-  advertisements[i] = createNewAdvertisement(i);
+var template = document.querySelector('.location_mark');
+var map = document.querySelector('.tokyo__pin-map');
+var pin = template.content.querySelector('.pin');
+var fragment = document.createDocumentFragment();
+var createTemplate = function (index) {
+	var div = document.createElement('div');
+	var img = document.createElement('img');
+	div.classList.add('pin');
+	div.style.left = index + 'px';
+	div.style.top = index + 'px';
+	img.src = index;
+	img.classList.add('rounded');
+	img.style.width = 40;
+	img.style.height = 40;
+	div.appendChild(img);
+	return div;
 }
 
+
+
+for (var i = 0; i < OBJECT_NUMBER; i++) {
+  advertisements[i] = createNewAdvertisement(i);
+  fragment.appendChild(createTemplate(i));
+}
+map.appendChild(fragment);
 console.log(advertisements);
+
+
 
 
