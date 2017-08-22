@@ -102,6 +102,49 @@ map.appendChild(fragment);
 
 console.log(map);
 
+var lodge = document.querySelector('#lodge-template');
+var dialogPanel = document.querySelector('.dialog__panel');
+var createLodge = function(newLodge) {
+  var dialog__panel = document.createElement('div');
+  dialog__panel.classList.add('dialog__panel');
+  var lodge__title = document.createElement('h3');
+  lodge__title.classList.add('lodge__title');
+  lodge__title.textContent = newLodge.offer.title;
+  var lodge__address = document.createElement('p');
+  lodge__address.classList.add('lodge__address');
+  lodge__address.textContent = newLodge.offer.address;
+  var lodge__price = document.createElement('h3');
+  lodge__price.classList.add('lodge__price');
+  lodge__price.textContent = newLodge.offer.price;
+  var lodge__type = document.createElement('h4');
+  lodge__type.classList.add('lodge__type');
+  lodge__type.textContent = newLodge.offer.type;
+  var lodge__rooms_and_guests = document.createElement('p');
+  lodge__rooms_and_guests.classList.add('lodge__rooms-and-guests');
+  lodge__title.textContent = 'Для ' + newLodge.offer.guests + ' гостей в ' + newLodge.offer.rooms + ' комнатах';
+  var lodge__checkin_time = document.createElement('p');
+  lodge__checkin_time.classList.add('lodge__checkin-time');
+  lodge__checkin_time.textContent = 'Заезд после ' + newLodge.offer.checkin + ',' + 'выезд до ' + newLodge.offer.checkout;
+  var lodge__features = document.createElement('div');
+  lodge__features.classList.add('lodge__features');
+  var lodge__features__array = function (newLodge) {
+    for (var k = 0; k < newLodge.offer.features.length; k++) {
+    var lodge__feature__image = document.createElement('span');
+    lodge__features__array[k] = lodge__feature__image;
+    console.log(newLodge.offer.feature);
+    lodge__feature__image.classList.add('feature__image feature__image--' + newLodge.offer.feature[k]);
+    }
+  }
+  console.log('тут');
+  console.log(lodge__features__array(newLodge));
+  var lodge__description = document.createElement('p');
+  lodge__description.classList.add('lodge__description');
+  lodge__description.textContent = newLodge.offer.description;
+  var lodge__photos = document.createElement('div');
+  lodge__photos.classList.add('lodge__photos');
+}
+
+console.log(createLodge(advertisements[0]));
 
 
 
