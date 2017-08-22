@@ -71,7 +71,7 @@ for (var i = 0; i < OBJECT_NUMBER; i++) {
   advertisements[i] = createNewAdvertisement(i);
 }
 
-
+// console.log(advertisements);
 
 
 
@@ -79,16 +79,16 @@ var template = document.querySelector('.location_mark');
 var map = document.querySelector('.tokyo__pin-map');
 var pin = template.content.querySelector('.pin');
 var fragment = document.createDocumentFragment();
-var createTemplate = function (index) {
+var createTemplate = function (newPin) {
 	var div = document.createElement('div');
 	var img = document.createElement('img');
 	div.classList.add('pin');
-	div.style.left = index + 'px';
-	div.style.top = index + 'px';
-	img.src = index;
+	div.style.left = newPin.location.x + 'px';
+	div.style.top = newPin.location.y + 'px';
+	img.src = newPin.author.avatar;
 	img.classList.add('rounded');
-	img.style.width = 40;
-	img.style.height = 40;
+	img.style.width = 40 + 'px';
+	img.style.height = 40 + 'px';
 	div.appendChild(img);
 	return div;
 }
