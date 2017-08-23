@@ -147,17 +147,18 @@ console.log(map);
 // console.log(createLodge(advertisements[0]));
 
 var lodgeTemplate = document.querySelector('#lodge-template').content;
-var dialogPanel = document.querySelector('.dialog__panel');
+var dialogPanel = lodgeTemplate.cloneNode(true);
+var dialogDomBlock = document.querySelector('#offer-dialog');
+var oldDialogPanel = dialogDomBlock.querySelector('.dialog__panel');
 
 
 var getLodgeTemplate = function(firstObj) {
   dialogPanel.querySelector('.lodge__title').textContent = firstObj.offer.title;
   dialogPanel.querySelector('.lodge__address').textContent = firstObj.offer.address;
-  dialogPanel.querySelector('.lodge__price').textContent = firstObj.offer.price + '&#x20bd;/ночь';
-  dialogPanel.querySelector('.lodge__type').textContent = firstObj.offer.type;
-  if (dialogPanel.querySelector('.lodge__type').textContent === 'flat') {
+  dialogPanel.querySelector('.lodge__price').innerHTML = firstObj.offer.price + '&#x20bd;/ночь';
+  if (firstObj.offer.type === 'flat') {
     dialogPanel.querySelector('.lodge__type').textContent = 'Квартира';
-  } else if (dialogPanel.querySelector('.lodge__type').textContent === 'bungalo') {
+  } else if (firstObj.offer.type === 'bungalo') {
     dialogPanel.querySelector('.lodge__type').textContent = 'Бунгало';
   } else {
     dialogPanel.querySelector('.lodge__type').textContent = 'Дом';
@@ -166,16 +167,19 @@ var getLodgeTemplate = function(firstObj) {
   dialogPanel.querySelector('.lodge__checkin-time').textContent = 'Заезд после ' + firstObj.offer.checkin + ',' + 'выезд до ' + firstObj.offer.checkout;
   for (var k = 0; k < firstObj.offer.features.length; k++) {
     var lodge__feature__image = document.createElement('span');
-    lodge__feature__image.classList.add('feature__image feature__image--' + firstObj.offer.feature[k]);
+    lodge__feature__image.className = 'feature__image feature__image--' + firstObj.offer.features[k];
     dialogPanel.querySelector('.lodge__features').appendChild(lodge__feature__image);
   }
   dialogPanel.querySelector('.lodge__description').textContent = firstObj.offer.description;
+
+  
   var dialogTitle = document.querySelector('.dialog__title');
-  var dialogImg = dialogTitle.content.querySelector('img');
+  var dialogImg = dialogTitle.querySelector('img');
   dialogImg.src = firstObj.author.avatar;
-  console.log(dialogImg);
+
+  return dialogPanel;
 }
 
-getLodgeTemplate(advertisements[0]);
+dialogDomBlock.replaceChild(getLodgeTemplate(advertisements[5]), oldDialogPanel);
 
 // console.log(getLodgeTemplate(advertisements[0]));
