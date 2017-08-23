@@ -113,3 +113,32 @@ var getLodgeTemplate = function (firstObj) {
 };
 
 dialogDomBlock.replaceChild(getLodgeTemplate(advertisements[5]), oldDialogPanel);
+
+var dialogClose = document.querySelector('.dialog__close');
+var tokyoPinMap = document.querySelector('.tokyo__pin-map');
+// var buttonPin = tokyoPinMap.getElementsByClassName('.pin');
+var buttonPin = tokyoPinMap.querySelectorAll('.pin');
+var pinCLickHandler = function (pinEvent) {
+  // buttonPin.classList.add('pin--active');
+  dialogDomBlock.style.display = 'block';
+  var clickedElement = pinEvent.currentTarget;
+  clickedElement.classList.add('pin--active');
+};
+
+buttonPin.addEventListener('click', pinCLickHandler);
+// tokyoPinMap.querySelector('div').addEventListener('click', function() {
+//   // if (buttonPin.contains('.pin--active')) {
+//   //   buttonPin.classList.remove('.pin--active');
+//   // }
+//   tokyoPinMap.querySelector('div').classList.add('pin--active');
+//   dialogDomBlock.style.display = 'block';
+// });
+
+dialogClose.addEventListener('click', function(pinEvent) {
+  dialogDomBlock.style.display = 'none';
+  buttonPin.classList.remove('pin--active');
+});
+
+
+
+
