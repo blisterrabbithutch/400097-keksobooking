@@ -117,7 +117,7 @@ dialogDomBlock.replaceChild(getLodgeTemplate(advertisements[5]), oldDialogPanel)
 var dialogClose = document.querySelector('.dialog__close');
 var tokyoPinMap = document.querySelector('.tokyo__pin-map');
 // var buttonPin = tokyoPinMap.getElementsByClassName('.pin');
-var buttonPin = tokyoPinMap.querySelectorAll('.pin');
+var buttonPin = tokyoPinMap.querySelector('.pin');
 var pinCLickHandler = function (pinEvent) {
   // buttonPin.classList.add('pin--active');
   dialogDomBlock.style.display = 'block';
@@ -139,6 +139,16 @@ dialogClose.addEventListener('click', function(pinEvent) {
   buttonPin.classList.remove('pin--active');
 });
 
+document.addEventListener('keydown', function (pinEvent) {
+  if (pinEvent.keyCode === 27) {
+  dialogDomBlock.style.display = 'none';
+  buttonPin.classList.remove('pin--active');
+  }
+  if (pinEvent.keyCode === 13) {
+  dialogDomBlock.style.display = 'block';
+  buttonPin.classList.add('pin--active');
+  }
+});
 
 
 
