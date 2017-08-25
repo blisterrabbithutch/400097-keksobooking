@@ -121,12 +121,13 @@ var buttonPin = tokyoPinMap.querySelectorAll('.pin');
 var pinCLickHandler = function (pinEvent) {
   dialogDomBlock.style.display = 'block';
   var clickedElement = pinEvent.currentTarget;
-  clickedElement.classList.add('pin--active');
   if (clickedElement.classList.contains('pin--active')) {
     console.log('привет');
   clickedElement.classList.remove('pin--active');
-  }
-};
+  dialogDomBlock.style.display = 'none';
+  } else {
+  clickedElement.classList.add('pin--active');
+}};
 
 for (var l = 0; l < buttonPin.length; l++) {
   buttonPin[l].addEventListener('click', pinCLickHandler);  
