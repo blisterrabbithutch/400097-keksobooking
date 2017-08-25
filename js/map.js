@@ -83,6 +83,7 @@ var lodgeTemplate = document.querySelector('#lodge-template').content;
 var dialogPanel = lodgeTemplate.cloneNode(true);
 var dialogDomBlock = document.querySelector('#offer-dialog');
 var oldDialogPanel = dialogDomBlock.querySelector('.dialog__panel');
+var pinActive = document.querySelector('.pin--active');
 
 
 var getLodgeTemplate = function (firstObj) {
@@ -122,10 +123,10 @@ var pinCLickHandler = function (pinEvent) {
   dialogDomBlock.style.display = 'block';
   var clickedElement = pinEvent.currentTarget;
   if (clickedElement.classList.contains('pin--active')) {
-    console.log('привет');
   clickedElement.classList.remove('pin--active');
   dialogDomBlock.style.display = 'none';
   } else {
+  // document.querySelector('.pin--active').classList.remove('pin--active');
   clickedElement.classList.add('pin--active');
 }};
 
