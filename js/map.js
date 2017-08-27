@@ -16,6 +16,8 @@ var LOCATION_MAX_X = 900;
 var LOCATION_MIN_Y = 100;
 var LOCATION_MAX_Y = 500;
 var OBJECT_NUMBER = 8;
+var KEYCODE_ESC = 27;
+var KEYCODE_ENTER = 13;
 
 var getRandomNumber = function (min, max) {
   return Math.round(min + Math.random() * (max - min));
@@ -83,8 +85,6 @@ var lodgeTemplate = document.querySelector('#lodge-template').content;
 var dialogPanel = lodgeTemplate.cloneNode(true);
 var dialogDomBlock = document.querySelector('#offer-dialog');
 var oldDialogPanel = dialogDomBlock.querySelector('.dialog__panel');
-var pinActive = document.querySelector('.pin--active');
-
 
 var getLodgeTemplate = function (firstObj) {
   dialogPanel.querySelector('.lodge__title').textContent = firstObj.offer.title;
@@ -119,12 +119,21 @@ var dialogClose = document.querySelector('.dialog__close');
 var tokyoPinMap = document.querySelector('.tokyo__pin-map');
 // var buttonPin = tokyoPinMap.getElementsByClassName('.pin');
 var buttonPin = tokyoPinMap.querySelectorAll('.pin');
+var pinActive = document.querySelector('.pin--active');
+console.log(pinActive);
+
+var showDialog = function () {
+  dialogDomBlock.classList.remove('hidden');
+}
+var hideDialog = function () {
+  dialogDomBlock.classList.add('hidden');
+}
 var pinCLickHandler = function (pinEvent) {
-  dialogDomBlock.style.display = 'block';
+  showDialog();
   var clickedElement = pinEvent.currentTarget;
-  if (clickedElement.classList.contains('pin--active')) {
-  clickedElement.classList.remove('pin--active');
-  dialogDomBlock.style.display = 'none';
+  if (pinActive = null) {
+  pinActive.classList.remove('pin--active');
+  hideDialog();
   } else {
   // document.querySelector('.pin--active').classList.remove('pin--active');
   clickedElement.classList.add('pin--active');
@@ -143,11 +152,11 @@ dialogClose.addEventListener('click', function (pinEvent) {
 });
 
 document.addEventListener('keydown', function (pinEvent) {
-  if (pinEvent.keyCode === 27) {
+  if (pinEvent.keyCode === KEYCODE_ESC) {
   dialogDomBlock.style.display = 'none';
   buttonPin.classList.remove('pin--active');
   }
-  if (pinEvent.keyCode === 13) {
+  if (pinEvent.keyCode === KEYCODE_ENTER) {
   dialogDomBlock.style.display = 'block';
   buttonPin.classList.add('pin--active');
   }
