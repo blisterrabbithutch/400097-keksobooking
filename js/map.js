@@ -194,8 +194,10 @@ formInputPrice.addEventListener('input', function (evt) {
 
 var formTimeIn = document.querySelector('.form_element_timein');
 var formTimeOut = document.querySelector('.form_element_timeout');
-if (formTimeIn.value == '13:00') {
-    formTimeOut.value == '13:00';
+console.log(formTimeIn.selectedIndex[0]);
+if (formTimeIn.selectedIndex = 0) {
+    formTimeOut.selectedIndex = 0;
+    console.log(formTimeOut.value);
   } else if (formTimeIn.value == '14:00') {
     formTimeOut.value == '14:00';
 }
