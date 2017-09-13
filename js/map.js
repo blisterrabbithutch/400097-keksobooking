@@ -18,14 +18,19 @@ var LOCATION_MAX_Y = 500;
 var OBJECT_NUMBER = 8;
 var KEYCODE_ESC = 27;
 var KEYCODE_ENTER = 13;
+var TYPE_ARRAY = {
+  'flat': 'Квартира',
+  'house': 'Дом',
+  'bungalo': 'Бунгало'
+}
 
-var getRandomNumber = function (min, max) {
+var getRandomNumber = function(min, max) {
   return Math.round(min + Math.random() * (max - min));
 };
 
 var advertisements = [];
 
-var createNewAdvertisement = function (index) {
+var createNewAdvertisement = function(index) {
 
   var locationX = getRandomNumber(LOCATION_MIN_X, LOCATION_MAX_X);
   var locationY = getRandomNumber(LOCATION_MIN_Y, LOCATION_MAX_Y);
@@ -62,12 +67,13 @@ for (var i = 0; i < OBJECT_NUMBER; i++) {
 
 var map = document.querySelector('.tokyo__pin-map');
 var fragment = document.createDocumentFragment();
-var createTemplate = function (newPin) {
+var createTemplate = function(newPin, index) {
   var div = document.createElement('div');
   var img = document.createElement('img');
   div.classList.add('pin');
   div.style.left = newPin.location.x + 'px';
   div.style.top = newPin.location.y + 'px';
+  div.dataset.id = index;
   img.src = newPin.author.avatar;
   img.classList.add('rounded');
   img.style.width = 40 + 'px';
@@ -76,27 +82,20 @@ var createTemplate = function (newPin) {
   return div;
 };
 for (var j = 0; j < advertisements.length; j++) {
-  fragment.appendChild(createTemplate(advertisements[j]));
+  fragment.appendChild(createTemplate(advertisements[j], j));
 }
 
 map.appendChild(fragment);
 
 var lodgeTemplate = document.querySelector('#lodge-template').content;
-var dialogPanel = lodgeTemplate.cloneNode(true);
 var dialogDomBlock = document.querySelector('#offer-dialog');
-var oldDialogPanel = dialogDomBlock.querySelector('.dialog__panel');
 
-var getLodgeTemplate = function (firstObj) {
+var getLodgeTemplate = function(firstObj) {
+  var dialogPanel = lodgeTemplate.cloneNode(true);
   dialogPanel.querySelector('.lodge__title').textContent = firstObj.offer.title;
   dialogPanel.querySelector('.lodge__address').textContent = firstObj.offer.address;
   dialogPanel.querySelector('.lodge__price').innerHTML = firstObj.offer.price + '&#x20bd;/ночь';
-  if (firstObj.offer.type === 'flat') {
-    dialogPanel.querySelector('.lodge__type').textContent = 'Квартира';
-  } else if (firstObj.offer.type === 'bungalo') {
-    dialogPanel.querySelector('.lodge__type').textContent = 'Бунгало';
-  } else {
-    dialogPanel.querySelector('.lodge__type').textContent = 'Дом';
-  }
+  dialogPanel.querySelector('.lodge__type').textContent = TYPE_ARRAY[firstObj.offer.type];
   dialogPanel.querySelector('.lodge__rooms-and-guests').textContent = 'Для ' + firstObj.offer.guests + ' гостей в ' + firstObj.offer.rooms + ' комнатах';
   dialogPanel.querySelector('.lodge__checkin-time').textContent = 'Заезд после ' + firstObj.offer.checkin + ',' + 'выезд до ' + firstObj.offer.checkout;
   for (var k = 0; k < firstObj.offer.features.length; k++) {
@@ -113,54 +112,91 @@ var getLodgeTemplate = function (firstObj) {
   return dialogPanel;
 };
 
-dialogDomBlock.replaceChild(getLodgeTemplate(advertisements[5]), oldDialogPanel);
-
 var dialogClose = document.querySelector('.dialog__close');
 var tokyoPinMap = document.querySelector('.tokyo__pin-map');
 // var buttonPin = tokyoPinMap.getElementsByClassName('.pin');
-var buttonPin = tokyoPinMap.querySelectorAll('.pin');
-var pinActive = document.querySelector('.pin--active');
-console.log(pinActive);
+var buttonPin = tokyoPinMap.querySelectorAll('.pin:not(:first-child)');
+var addHideDialogEventListener = function(evt) {
+  if (evt.keyCode === KEYCODE_ESC) {
+    hideDialog();
+  }
+  var pinActive = document.querySelector('.pin--active');
+  if (pinActive) {
+    pinActive.classList.remove('pin--active');
+  }
+}
 
-var showDialog = function () {
+var showDialog = function() {
   dialogDomBlock.classList.remove('hidden');
+  document.addEventListener('keydown', addHideDialogEventListener);
 }
-var hideDialog = function () {
+var hideDialog = function() {
   dialogDomBlock.classList.add('hidden');
+  document.removeEventListener('keydown', addHideDialogEventListener);
 }
-var pinCLickHandler = function (pinEvent) {
+var pinCLickHandler = function(pinEvent) {
   showDialog();
   var clickedElement = pinEvent.currentTarget;
-  if (pinActive = null) {
-  pinActive.classList.remove('pin--active');
-  hideDialog();
-  } else {
+  var currentId = clickedElement.dataset.id;
+  var pinActive = document.querySelector('.pin--active');
+  if (pinActive) {
+    pinActive.classList.remove('pin--active');
+    // hideDialog(); почему убрали?
+  }
   // document.querySelector('.pin--active').classList.remove('pin--active');
   clickedElement.classList.add('pin--active');
-}};
+  var oldDialogData = dialogDomBlock.querySelector('.dialog__panel');
+  dialogDomBlock.replaceChild(getLodgeTemplate(advertisements[currentId]), oldDialogData);
+};
 
 for (var l = 0; l < buttonPin.length; l++) {
-  buttonPin[l].addEventListener('click', pinCLickHandler);  
+  buttonPin[l].addEventListener('click', pinCLickHandler);
 }
 
-dialogClose.addEventListener('click', function (pinEvent) {
-  dialogDomBlock.style.display = 'none';
-  for (var l = 0; l < buttonPin.length; l++) {
-  buttonPin[l].classList.remove('pin--active');
-}
-  
-});
+dialogClose.addEventListener('click', hideDialog);
 
-document.addEventListener('keydown', function (pinEvent) {
-  if (pinEvent.keyCode === KEYCODE_ESC) {
-  dialogDomBlock.style.display = 'none';
-  buttonPin.classList.remove('pin--active');
-  }
-  if (pinEvent.keyCode === KEYCODE_ENTER) {
-  dialogDomBlock.style.display = 'block';
-  buttonPin.classList.add('pin--active');
+
+var formInputTitle = document.querySelector('.form_element_title_input');
+formInputTitle.addEventListener('invalid', function (evt) {
+  if (!formInputTitle.validity.valid) {
+    if (formInputTitle.validity.valueMissing) {
+      formInputTitle.setCustomValidity('Привет, это поле пустое. Совсем');
+    }
+  } else {
+    formInputTitle.setCustomValidity('');
   }
 });
 
+formInputTitle.addEventListener('input', function (evt) {
+  var target = evt.target;
+  if (target.value.length < 30) {
+    target.setCustomValidity('Привет. Введите заголовок более 30 символов.');
+  } else if (target.value.length > 100) {
+    target.setCustomValidity('Привет. Введите заголовок менее 100 символов.');
+  } 
+  else {
+    formInputTitle.setCustomValidity('');
+  }
+});
 
+var formInputPrice = document.querySelector('.form_element_price_input');
+formInputPrice.addEventListener('input', function (evt) {
+  var target = evt.target;
+  if (target.value < 30) {
+    target.setCustomValidity('Привет. Введите стоимость больше');
+  } else if (target.value > 1000000) {
+    target.setCustomValidity('Привет. Введите стоимость менее 1000000');
+  } 
+  else {
+    formInputPrice.setCustomValidity('');
+  }
+});
+
+var formTimeIn = document.querySelector('.form_element_timein');
+var formTimeOut = document.querySelector('.form_element_timeout');
+if (formTimeIn.value == '13:00') {
+    formTimeOut.value == '13:00';
+  } else if (formTimeIn.value == '14:00') {
+    formTimeOut.value == '14:00';
+}
 
