@@ -114,7 +114,6 @@ var getLodgeTemplate = function(firstObj) {
 
 var dialogClose = document.querySelector('.dialog__close');
 var tokyoPinMap = document.querySelector('.tokyo__pin-map');
-// var buttonPin = tokyoPinMap.getElementsByClassName('.pin');
 var buttonPin = tokyoPinMap.querySelectorAll('.pin:not(:first-child)');
 var addHideDialogEventListener = function(evt) {
   if (evt.keyCode === KEYCODE_ESC) {
@@ -201,4 +200,72 @@ if (formTimeIn.selectedIndex = 0) {
   } else if (formTimeIn.value == '14:00') {
     formTimeOut.value == '14:00';
 }
+
+
+// автосинхронизация
+
+var form = document.querySelector('.notice__form');
+var title = form.querySelector('#title');
+var timeIn = form.querySelector('#timein');
+var timeOut = form.querySelector('#timeout');
+var lodgeType = form.querySelector('#type');
+var lodgePrice = form.querySelector('#price');
+var roomAmount = form.querySelector('#room_number');
+var lodgeCapacity = form.querySelector('#capacity');
+var submit = form.querySelector('.form__submit');
+var inputs = form.querySelectorAll('input');
+
+
+var synchronizeTimeInOut = function () {
+  for (var t = 0; t < timeOut.options.length; t++) {
+    if (timeOut.options[t].value === timeIn.selectedOptions[0].value) {
+      timeOut.options[t].selected = true;
+    }
+  }
+};
+
+var synchronizeTimeOutIn = function () {
+  for (var t = 0; t < timeIn.options.length; t++) {
+    if (timeIn.options[t].value === timeOut.selectedOptions[0].value) {
+      timeIn.options[t].selected = true;
+    }
+  }
+};
+
+var synchronizeMinPrice = function () {
+  var selectedOption = lodgeType.selectedOptions[0].value;
+  if (selectedOption === 'bungalo') {
+    lodgePrice.min = '0';
+    lodgePrice.placeholder = '0';
+  } else if (selectedOption === 'flat') {
+    lodgePrice.min = '1000';
+    lodgePrice.placeholder = '1000';
+  } else if (selectedOption === 'house') {
+    lodgePrice.min = '5000';
+    lodgePrice.placeholder = '5000';
+  } else if (selectedOption === 'palace') {
+    lodgePrice.min = '10000';
+    lodgePrice.placeholder = '10000';
+  }
+};
+
+var synchronizeCapacity = function () {
+  var selectedOption = roomAmount.selectedOptions[0].textContent;
+  if (selectedOption === '1 комната') {
+    lodgeCapacity.options[2].selected = true;
+  } else if (selectedOption === '2 комнаты') {
+    lodgeCapacity.options[1].selected = true;
+  } else if (selectedOption === '3 комнаты') {
+    lodgeCapacity.options[0].selected = true;
+  } else if (selectedOption === '100 комнат') {
+    lodgeCapacity.options[3].selected = true;
+  }
+};
+
+synchronizeMinPrice();
+roomAmount.addEventListener('change', synchronizeCapacity);
+timeIn.addEventListener('change', synchronizeTimeInOut);
+timeOut.addEventListener('change', synchronizeTimeOutIn);
+lodgeType.addEventListener('change', synchronizeMinPrice);
+
 
