@@ -38,11 +38,51 @@
     };
   };
 
-  // не уверен можно ли записать функцию в объект так, а не перенося ее целиком как в демке
-
   window.map = {
     advertisements: [],
     
   }
+
+var dialogHandle = document.querySelector('.pin__main');
+
+dialogHandle.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
+    };
+    // проверить убрав начальные координаты
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+
+    dialogHandle.style.top = (dialogHandle.offsetTop - shift.y) + 'px';
+    dialogHandle.style.left = (dialogHandle.offsetLeft - shift.x) + 'px';
+    var addressType = document.querySelector('#address');
+    addressType.value = 'x:' + moveEvt.clientX + ', y:' + moveEvt.clientY;
+  };
+
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+
+});
+
 
 })();
