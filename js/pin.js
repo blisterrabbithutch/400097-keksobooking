@@ -1,47 +1,46 @@
 // pin.js
-
 (function () {
 
-var dialogClose = document.querySelector('.dialog__close');
-var tokyoPinMap = document.querySelector('.tokyo__pin-map');
-var buttonPin = tokyoPinMap.querySelectorAll('.pin:not(:first-child)');
-var addHideDialogEventListener = function(evt) {
-  if (evt.keyCode === KEYCODE_ESC) {
-    hideDialog();
+  var dialogClose = document.querySelector('.dialog__close');
+  var tokyoPinMap = document.querySelector('.tokyo__pin-map');
+  var buttonPin = tokyoPinMap.querySelectorAll('.pin:not(:first-child)');
+  var addHideDialogEventListener = function(evt) {
+    if (evt.keyCode === KEYCODE_ESC) {
+      hideDialog();
+    }
+    var pinActive = document.querySelector('.pin--active');
+    if (pinActive) {
+      pinActive.classList.remove('pin--active');
+    }
   }
-  var pinActive = document.querySelector('.pin--active');
-  if (pinActive) {
-    pinActive.classList.remove('pin--active');
+
+  var showDialog = function() {
+    dialogDomBlock.classList.remove('hidden');
+    document.addEventListener('keydown', addHideDialogEventListener);
   }
-}
-
-var showDialog = function() {
-  dialogDomBlock.classList.remove('hidden');
-  document.addEventListener('keydown', addHideDialogEventListener);
-}
-var hideDialog = function() {
-  dialogDomBlock.classList.add('hidden');
-  document.removeEventListener('keydown', addHideDialogEventListener);
-}
-var pinCLickHandler = function(pinEvent) {
-  showDialog();
-  var clickedElement = pinEvent.currentTarget;
-  var currentId = clickedElement.dataset.id;
-  var pinActive = document.querySelector('.pin--active');
-  if (pinActive) {
-    pinActive.classList.remove('pin--active');
-    // hideDialog(); почему убрали?
+  var hideDialog = function() {
+    dialogDomBlock.classList.add('hidden');
+    document.removeEventListener('keydown', addHideDialogEventListener);
   }
-  // document.querySelector('.pin--active').classList.remove('pin--active');
-  clickedElement.classList.add('pin--active');
-  var oldDialogData = dialogDomBlock.querySelector('.dialog__panel');
-  dialogDomBlock.replaceChild(getLodgeTemplate(advertisements[currentId]), oldDialogData);
-};
+  var pinCLickHandler = function(pinEvent) {
+    showDialog();
+    var clickedElement = pinEvent.currentTarget;
+    var currentId = clickedElement.dataset.id;
+    var pinActive = document.querySelector('.pin--active');
+    if (pinActive) {
+      pinActive.classList.remove('pin--active');
+      // hideDialog(); почему убрали?
+    }
+    // document.querySelector('.pin--active').classList.remove('pin--active');
+    clickedElement.classList.add('pin--active');
+    var oldDialogData = dialogDomBlock.querySelector('.dialog__panel');
+    dialogDomBlock.replaceChild(getLodgeTemplate(advertisements[currentId]), oldDialogData);
+  };
 
-for (var l = 0; l < buttonPin.length; l++) {
-  buttonPin[l].addEventListener('click', pinCLickHandler);
-}
+  for (var l = 0; l < buttonPin.length; l++) {
+    buttonPin[l].addEventListener('click', pinCLickHandler);
+  }
 
-dialogClose.addEventListener('click', hideDialog);
+  dialogClose.addEventListener('click', hideDialog);
 
 })();
