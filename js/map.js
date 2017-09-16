@@ -7,7 +7,7 @@
 
   var advertisements = [];
 
-  var createNewAdvertisement = function(index) {
+  window.createNewAdvertisement = function(index) {
 
     var locationX = getRandomNumber(window.data.LOCATION_MIN_X, window.data.LOCATION_MAX_X);
     var locationY = getRandomNumber(window.data.LOCATION_MIN_Y, window.data.LOCATION_MAX_Y);
@@ -18,15 +18,15 @@
       },
 
       'offer': {
-        'title': OFFER_TITLE[i],
+        'title': window.data.OFFER_TITLE[index],
         'address': locationX + ', ' + locationY,
-        'price': getRandomNumber(OFFER_MIN_PRICE, OFFER_MAX_PRICE),
-        'type': OFFER_TYPE[getRandomNumber(0, OFFER_TYPE.length - 1)],
-        'rooms': getRandomNumber(OFFER_MIN_ROOMS, OFFER_MAX_ROOMS),
-        'guests': getRandomNumber(OFFER_MIN_GUESTS, OFFER_MAX_GUESTS),
-        'checkin': OFFER_CHECK_IN[getRandomNumber(0, OFFER_CHECK_IN.length - 1)],
-        'checkout': OFFER_CHECK_OUT[getRandomNumber(0, OFFER_CHECK_OUT.length - 1)],
-        'features': OFFER_FEATURES.slice(0, OFFER_FEATURES.length - 1),
+        'price': getRandomNumber(window.data.OFFER_MIN_PRICE, window.data.OFFER_MAX_PRICE),
+        'type': window.data.OFFER_TYPE[getRandomNumber(0, window.data.OFFER_TYPE.length - 1)],
+        'rooms': getRandomNumber(window.data.OFFER_MIN_ROOMS, window.data.OFFER_MAX_ROOMS),
+        'guests': getRandomNumber(window.data.OFFER_MIN_GUESTS, window.data.OFFER_MAX_GUESTS),
+        'checkin': window.data.OFFER_CHECK_IN[getRandomNumber(0, window.data.OFFER_CHECK_IN.length - 1)],
+        'checkout': window.data.OFFER_CHECK_OUT[getRandomNumber(0, window.data.OFFER_CHECK_OUT.length - 1)],
+        'features': window.data.OFFER_FEATURES.slice(0, window.data.OFFER_FEATURES.length - 1),
         'description': '',
         'photos': []
       },
@@ -42,7 +42,7 @@
 
   window.map = {
     advertisements: [],
-    createNewAdvertisement: function(index)
-  };
+    
+  }
 
 })();

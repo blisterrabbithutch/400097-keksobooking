@@ -5,7 +5,7 @@
   var tokyoPinMap = document.querySelector('.tokyo__pin-map');
   var buttonPin = tokyoPinMap.querySelectorAll('.pin:not(:first-child)');
   var addHideDialogEventListener = function(evt) {
-    if (evt.keyCode === KEYCODE_ESC) {
+    if (evt.keyCode === window.data.KEYCODE_ESC) {
       hideDialog();
     }
     var pinActive = document.querySelector('.pin--active');
@@ -15,11 +15,11 @@
   }
 
   var showDialog = function() {
-    dialogDomBlock.classList.remove('hidden');
+    window.card.dialogDomBlock.classList.remove('hidden');
     document.addEventListener('keydown', addHideDialogEventListener);
   }
   var hideDialog = function() {
-    dialogDomBlock.classList.add('hidden');
+    window.card.dialogDomBlock.classList.add('hidden');
     document.removeEventListener('keydown', addHideDialogEventListener);
   }
   var pinCLickHandler = function(pinEvent) {
@@ -34,7 +34,7 @@
     // document.querySelector('.pin--active').classList.remove('pin--active');
     clickedElement.classList.add('pin--active');
     var oldDialogData = dialogDomBlock.querySelector('.dialog__panel');
-    dialogDomBlock.replaceChild(getLodgeTemplate(advertisements[currentId]), oldDialogData);
+    window.card.dialogDomBlock.replaceChild(window.getLodgeTemplate(window.map.advertisements[currentId]), oldDialogData);
   };
 
   for (var l = 0; l < buttonPin.length; l++) {
