@@ -1,10 +1,11 @@
 // pin.js
+'use strict';
 (function () {
 
   var dialogClose = document.querySelector('.dialog__close');
   var tokyoPinMap = document.querySelector('.tokyo__pin-map');
   var buttonPin = tokyoPinMap.querySelectorAll('.pin:not(:first-child)');
-  var addHideDialogEventListener = function(evt) {
+  var addHideDialogEventListener = function (evt) {
     if (evt.keyCode === window.data.KEYCODE_ESC) {
       hideDialog();
     }
@@ -12,17 +13,17 @@
     if (pinActive) {
       pinActive.classList.remove('pin--active');
     }
-  }
+  };
 
-  var showDialog = function() {
+  var showDialog = function () {
     window.card.dialogDomBlock.classList.remove('hidden');
     document.addEventListener('keydown', addHideDialogEventListener);
-  }
-  var hideDialog = function() {
+  };
+  var hideDialog = function () {
     window.card.dialogDomBlock.classList.add('hidden');
     document.removeEventListener('keydown', addHideDialogEventListener);
-  }
-  var pinCLickHandler = function(pinEvent) {
+  };
+  var pinCLickHandler = function (pinEvent) {
     showDialog();
     var clickedElement = pinEvent.currentTarget;
     var currentId = clickedElement.dataset.id;

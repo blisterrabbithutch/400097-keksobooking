@@ -1,15 +1,14 @@
 // card.js
+'use strict';
 (function () {
 
   for (var i = 0; i < window.data.OBJECT_NUMBER; i++) {
     window.map.advertisements[i] = createNewAdvertisement(i);
   }
 
-
-
   var map = document.querySelector('.tokyo__pin-map');
   var fragment = document.createDocumentFragment();
-  var createTemplate = function(newPin, index) {
+  var createTemplate = function (newPin, index) {
     var div = document.createElement('div');
     var img = document.createElement('img');
     div.classList.add('pin');
@@ -32,7 +31,7 @@
   var lodgeTemplate = document.querySelector('#lodge-template').content;
   dialogDomBlock = document.querySelector('#offer-dialog');
 
-  window.getLodgeTemplate = function(firstObj) {
+  window.getLodgeTemplate = function (firstObj) {
     var dialogPanel = lodgeTemplate.cloneNode(true);
     dialogPanel.querySelector('.lodge__title').textContent = firstObj.offer.title;
     dialogPanel.querySelector('.lodge__address').textContent = firstObj.offer.address;
@@ -56,6 +55,6 @@
 
   window.card = {
     dialogDomBlock : document.querySelector('#offer-dialog')
-  }
+  };
 
 })();
