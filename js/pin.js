@@ -34,7 +34,7 @@
     }
     // document.querySelector('.pin--active').classList.remove('pin--active');
     clickedElement.classList.add('pin--active');
-    var oldDialogData = dialogDomBlock.querySelector('.dialog__panel');
+    var oldDialogData = window.card.dialogDomBlock.querySelector('.dialog__panel');
     window.card.dialogDomBlock.replaceChild(window.getLodgeTemplate(window.map.advertisements[currentId]), oldDialogData);
   };
 

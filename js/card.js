@@ -3,7 +3,7 @@
 (function () {
 
   for (var i = 0; i < window.data.OBJECT_NUMBER; i++) {
-    window.map.advertisements[i] = createNewAdvertisement(i);
+    window.map.advertisements[i] = window.createNewAdvertisement(i);
   }
 
   var map = document.querySelector('.tokyo__pin-map');
@@ -29,7 +29,7 @@
   map.appendChild(fragment);
 
   var lodgeTemplate = document.querySelector('#lodge-template').content;
-  dialogDomBlock = document.querySelector('#offer-dialog');
+
 
   window.getLodgeTemplate = function (firstObj) {
     var dialogPanel = lodgeTemplate.cloneNode(true);
@@ -54,7 +54,7 @@
   };
 
   window.card = {
-    dialogDomBlock : document.querySelector('#offer-dialog')
+    dialogDomBlock: document.querySelector('#offer-dialog')
   };
 
 })();
